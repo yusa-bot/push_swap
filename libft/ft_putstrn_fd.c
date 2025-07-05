@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstrn_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 22:44:05 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/05 15:04:55 by ayusa            ###   ########.fr       */
+/*   Created: 2025/05/19 19:32:22 by ayusa             #+#    #+#             */
+/*   Updated: 2025/07/05 14:57:00 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_putstrn_fd(char *s, int fd, size_t n)
 {
-	char	*c;
-	int		len;
+	size_t	i;
 
-	len = 0;
-	c = ft_itoa(n);
-	if (!c)
+	if (!s)
 		return (0);
-	len += write(fd, c, ft_strlen(c));
-	free(c);
-	return (len);
+	i = 0;
+	while (s[i] && i < n)
+		write(fd, &s[i++], 1);
+	return (i);
 }

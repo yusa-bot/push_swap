@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 22:44:05 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/05 15:04:55 by ayusa            ###   ########.fr       */
+/*   Created: 2025/05/03 13:03:40 by ayusa             #+#    #+#             */
+/*   Updated: 2025/07/05 12:18:10 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putnbr_fd(int n, int fd)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*c;
-	int		len;
+	int	len;
 
-	len = 0;
-	c = ft_itoa(n);
-	if (!c)
-		return (0);
-	len += write(fd, c, ft_strlen(c));
-	free(c);
-	return (len);
+	len = ft_strlen(s);
+	while (len >= 0)
+	{
+		if (s[len] == (char)c)
+			return ((char *)&s[len]);
+		len--;
+	}
+	return (NULL);
 }

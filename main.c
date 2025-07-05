@@ -6,36 +6,17 @@
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:27:17 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/04 20:11:42 by ayusa            ###   ########.fr       */
+/*   Updated: 2025/07/05 20:26:32 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int is_int(char *str)
+static t_stack	*create_node(int value)
 {
-	int i = 0;
-	int sign = 0;
-	if (!str || str[i] == '\0')
-		return (0);
-	if (str[i] == '+' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (str[i] != '\0')
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
+	t_stack	*node;
 
-t_stack *create_node(int value)
-{
-	t_stack *node = malloc(sizeof(t_stack));
+	node = malloc(sizeof(t_stack));
 	if (!node)
 		return (NULL);
 	node->value = value;
@@ -45,9 +26,9 @@ t_stack *create_node(int value)
 	return (node);
 }
 
-void	append_node(t_stack **head, t_stack *node)
+static void	append_node(t_stack **head, t_stack *node)
 {
-	t_stack *tail;
+	t_stack	*tail;
 
 	if (!head || !node)
 		return ;
@@ -63,135 +44,54 @@ void	append_node(t_stack **head, t_stack *node)
 	node->prev = tail;
 }
 
-int	has_dup(t_stack *stack, int value)
+static t_stack	*to_stack(char **ag, int ac)
 {
-	while (stack)
-	{
-		if (stack->value == value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
+	int		i;
+	t_stack	*a;
+	t_stack	*node;
+	long	value;
 
-int is_sorted(t_stack *stack)
-{
-	if (!stack)
-		return (1);
-	while (stack->next)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
-void free_stack(t_stack *stack)
-{
-	t_stack *tmp;
-	if (!stack)
-		return ;
-	while (stack)
-	{
-		tmp = stack->next;
-		free(stack);
-		stack = tmp;
-	}
-}
-
-void free_split(char **ag)
-{
-	int	i;
-
-	if (!ag)
-		return ;
 	i = 0;
+	a = NULL;
+	node = NULL;
 	while (ag[i])
-		free(ag[i++]);
-	free(ag);
-}
-
-void	assign_index(t_stack *stack)
-{
-	t_stack	*current;
-	t_stack *compare;
-	int index;
-
-	current = stack;
-	while (current)
 	{
-		index = 0;
-		compare = stack;
-		while (compare)
-		{
-			if (compare->value < current->value)
-				index++;
-			compare = compare->next;
-		}
-		current->index = index;
-		current = current->next;
+		if (!is_int(ag[i]))
+			error_exit(a, ag, ac);
+		value = ft_atol(ag[i]);
+		if (value < INT_MIN || value > INT_MAX)
+			error_exit(a, ag, ac);
+		node = create_node(value);
+		if (!node)
+			error_exit(a, ag, ac);
+		if (!has_dup(a, value))
+			error_exit(a, ag, ac);
+		append_node(&a, node);
+		i++;
 	}
-}
-//
-void	print_stack(const char *label, t_stack *stack)
-{
-	printf("%s: ", label);
-	while (stack)
-	{
-		printf("[%d(i:%d)] ", stack->value, stack->index);
-		stack = stack->next;
-	}
-	printf("\n");
+	return (a);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int num = 0;
-	int i = 0;
-	char **ag;
+	char	**ag;
+	t_stack	*a;
+	t_stack	*b;
 
 	if (ac == 1)
 		return (0);
 	if (ac == 2)
-		ag  = ft_split(av[1], ' ');
+		ag = ft_split(av[1]);
 	else
 		ag = &av[1];
-
-
-	t_stack	*a = NULL;
-	t_stack *node = NULL;
-	while (ag[i])
-	{
-		if (!is_int(ag[i]))
-			return printf("Error\n");
-
-		int value = atoi(ag[i]);
-		node = create_node(value);
-		if (!node)
-			return printf("Error\n");
-		if (!has_dup(a, value))
-			return printf("Error\n");
-		append_node(&a, node);
-		i++;
-	}
-	assign_index(a);
+	a = to_stack(ag, ac);
 	if (is_sorted(a))
-	{
-		free_stack(a);
-		return (0);
-	}
-
-	t_stack *b = NULL;
-
+		error_exit(a, ag, ac);
+	assign_index(a);
+	b = NULL;
 	//print_stack("A", a);
-	//print_stack("B", b);
-
 	push_swap(&a, &b);
-
 	//print_stack("A", a);
-	//print_stack("B", b);
-
 	free_stack(a);
 	free_stack(b);
 	if (ac == 2)

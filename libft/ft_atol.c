@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 22:44:05 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/05 15:04:55 by ayusa            ###   ########.fr       */
+/*   Created: 2025/07/05 20:18:45 by ayusa             #+#    #+#             */
+/*   Updated: 2025/07/05 20:19:18 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putnbr_fd(int n, int fd)
+long	ft_atol(const char *str)
 {
-	char	*c;
-	int		len;
+	long		res;
+	int			sign;
+	int			i;
 
-	len = 0;
-	c = ft_itoa(n);
-	if (!c)
-		return (0);
-	len += write(fd, c, ft_strlen(c));
-	free(c);
-	return (len);
+	res = 0;
+	sign = 1;
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res * sign);
 }
+

@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   sort_3_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 22:44:05 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/05 15:04:55 by ayusa            ###   ########.fr       */
+/*   Created: 2025/07/05 16:55:50 by ayusa             #+#    #+#             */
+/*   Updated: 2025/07/05 18:36:09 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_putnbr_fd(int n, int fd)
+void	zyx(t_stack **a)
 {
-	char	*c;
-	int		len;
+	sa(*a);
+	ft_printf("sa\n");
+	rra(a);
+	ft_printf("rra\n");
+}
 
-	len = 0;
-	c = ft_itoa(n);
-	if (!c)
-		return (0);
-	len += write(fd, c, ft_strlen(c));
-	free(c);
-	return (len);
+void	xzy(t_stack **a)
+{
+	sa(*a);
+	ft_printf("sa\n");
+	ra(a);
+	ft_printf("ra\n");
 }

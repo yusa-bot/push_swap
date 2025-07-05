@@ -5,20 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/05/02 00:02:40 by ayusa             #+#    #+#              #
-#    Updated: 2025/07/05 15:01:54 by ayusa            ###   ########.fr        #
+#    Created: 2025/05/19 17:35:53 by ayusa             #+#    #+#              #
+#    Updated: 2025/07/05 18:56:28 by ayusa            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = ft_printf.a
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+AR = ar rcs
+RM = rm -f
 
 SRCS = $(wildcard ./*.c)
 OBJS = $(SRCS:.c=.o)
-
-CC      = cc
-CFLAGS  = -Wall -Wextra -Werror
-AR      = ar rcs
-RM      = rm -f
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -36,4 +36,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

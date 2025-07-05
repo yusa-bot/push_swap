@@ -1,40 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix.c                                            :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 18:15:25 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/05 19:23:04 by ayusa            ###   ########.fr       */
+/*   Created: 2025/07/05 17:12:20 by ayusa             #+#    #+#             */
+/*   Updated: 2025/07/05 18:36:09 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	radix(t_stack **a, t_stack **b, int size)
+void	sa(t_stack *stack)
 {
-	int	max_bits;
-	int	i;
-	int	j;
+	int	tmp;
+	int	tmp_inx;
 
-	max_bits = 0;
-	while ((size - 1) >> max_bits)
-		max_bits++;
-	i = 0;
-	while (i < max_bits)
-	{
-		j = 0;
-		while (j < size)
-		{
-			if (((*a)->index >> i & 1))
-				do_ra(a);
-			else
-				do_pb(a, b);
-			j++;
-		}
-		while (*b)
-			do_pa(a, b);
-		i++;
-	}
+	if (!stack || !stack->next)
+		return ;
+	tmp = stack->value;
+	stack->value = stack->next->value;
+	stack->next->value = tmp;
+	tmp_inx = stack->index;
+	stack->index = stack->next->index;
+	stack->next->index = tmp_inx;
+}
+
+void	sb(t_stack *stack)
+{
+	sa(stack);
+}
+
+void	ss(t_stack *a, t_stack *b)
+{
+	sa(a);
+	sb(b);
+}
+
+void	do_sa(t_stack **a)
+{
+	sa(*a);
+	ft_printf("sa\n");
 }

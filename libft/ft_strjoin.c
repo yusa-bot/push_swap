@@ -6,7 +6,7 @@
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 02:26:23 by ayusa             #+#    #+#             */
-/*   Updated: 2025/05/04 02:48:05 by ayusa            ###   ########.fr       */
+/*   Updated: 2025/07/05 17:50:31 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ptr[i] = s1[i];
 		i++;
 	}
-	while(s2[j])
+	while (s2[j])
 	{
-		ptr[i] = s2[j]
+		ptr[i] = s2[j];
 		i++;
 		j++;
 	}

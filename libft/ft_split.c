@@ -6,7 +6,7 @@
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:49:40 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/04 15:17:15 by ayusa            ###   ########.fr       */
+/*   Updated: 2025/07/05 18:36:09 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	find_next_word(char *str, int *start, int *end)
 			|| str[i] == '\n'))
 		i++;
 	*start = i;
-	while (str[i] != '\0' && str[i] != ' ' \
-		&& str[i] != '\t' && str[i] != '\n')
+	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 		i++;
 	*end = i;
 	return (*start < *end);
@@ -88,7 +87,7 @@ int	ft_fill_words(char **tab, char *str)
 	return (1);
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split(char *s)
 {
 	char	**out;
 	int		size;
@@ -114,7 +113,7 @@ char	**ft_split(char *s, char c)
 //	int i = 0;
 //	while (*res[i])
 //	{
-//		printf("%s\n", res[i]);
+//		ft_printf("%s\n", res[i]);
 //		i++;
 //	}
 //}

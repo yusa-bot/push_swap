@@ -6,15 +6,15 @@
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 19:15:21 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/04 19:29:49 by ayusa            ###   ########.fr       */
+/*   Updated: 2025/07/05 18:47:01 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int stack_size(t_stack *a)
+static int	stack_size(t_stack *a)
 {
-	int i;
+	int	i;
 
 	if (!a)
 		return (0);
@@ -27,139 +27,73 @@ int stack_size(t_stack *a)
 	return (i);
 }
 
-void sort_2(t_stack *a)
+static void	sort_2(t_stack *a)
 {
 	if (a->value > a->next->value)
 	{
 		sa(a);
-		printf("sa\n");
+		ft_printf("sa\n");
 	}
 }
 
-void sort_3(t_stack **a)
+static void	sort_3(t_stack **a)
 {
-	int x = (*a)->value;
-	int y = (*a)->next->value;
-	int z = (*a)->next->next->value;
+	int	x;
+	int	y;
+	int	z;
 
+	x = (*a)->value;
+	y = (*a)->next->value;
+	z = (*a)->next->next->value;
 	if (x < y && y < z)
 		return ;
 	else if (x > y && y < z && x < z)
-	{
-		sa(*a);
-		printf("sa\n");
-	}
+		do_sa(a);
 	else if (x > y && y > z && x > z)
-	{
-		sa(*a);
-		printf("sa\n");
-		rra(a);
-		printf("rra\n");
-	}
+		zyx(a);
 	else if (x > y && y < z && x > z)
-	{
-		ra(a);
-		printf("ra\n");
-	}
+		do_ra(a);
 	else if (x < y && y > z && x < z)
-	{
-		sa(*a);
-		printf("sa\n");
-		ra(a);
-		printf("ra\n");
-	}
+		xzy(a);
 	else if (x < y && y > z && x > z)
-	{
-		rra(a);
-		printf("rra\n");
-	}
+		do_rra(a);
 }
 
-t_stack *get_min_node(t_stack *stack)
+static void	sort_4_5_6(t_stack **a, t_stack **b, int size)
 {
-	t_stack *min;
-	int pos;
-
-	pos = 0;
-	if (!stack)
-		return (NULL);
-	min = stack;
-	while (stack)
-	{
-		if (min->value > stack->value)
-			min = stack;
-		stack = stack->next;
-	}
-	return (min);
-}
-
-int get_pos(t_stack *stack, t_stack *min)
-{
-	int pos;
-
-	pos = 0;
-	if (!stack || !min)
-		return (0);
-	while (stack)
-	{
-		if (stack == min)
-			return (pos);
-		stack = stack->next;
-		pos++;
-	}
-	return (0);
-}
-//6か？
-void	sort_4_5(t_stack **a, t_stack **b, int size)
-{
-	t_stack *min;
-	int pos;
+	t_stack	*min;
+	int		pos;
 
 	while (size > 3)
 	{
 		min = get_min_node(*a);
 		pos = get_pos(*a, min);
-
 		if (pos <= size / 2)
-		{
-			while (*a != min)
-			{
-				ra(a);
-				printf("ra\n");
-			}
-		}
+			pos_ra(a, min);
 		else
-		{
-			while (*a != min)
-			{
-				rra(a);
-				printf("rra\n");
-			}
-		}
+			pos_rra(a, min);
 		pb(a, b);
-		printf("pb\n");
+		ft_printf("pb\n");
 		size--;
 	}
 	sort_3(a);
 	while (*b)
-	{
-		pa(a, b);
-		printf("pa\n");
-	}
+		do_pa(a, b);
 }
 
 void	push_swap(t_stack **a, t_stack **b)
 {
-	int size = stack_size(*a);
+	int	size;
 
+	size = stack_size(*a);
 	if (size == 1)
 		return ;
 	if (size == 2)
 		sort_2(*a);
 	else if (size == 3)
 		sort_3(a);
-	else if (size <= 6)//OK
-		sort_4_5(a, b, size);
+	else if (size <= 6)
+		sort_4_5_6(a, b, size);
 	else if (size >= 7)
 		radix(a, b, size);
 }

@@ -6,15 +6,15 @@
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:58:07 by ayusa             #+#    #+#             */
-/*   Updated: 2025/05/05 22:10:21 by ayusa            ###   ########.fr       */
+/*   Updated: 2025/07/05 15:05:19 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+		return (0);
+	return (write(fd, s, ft_strlen(s)));
 }

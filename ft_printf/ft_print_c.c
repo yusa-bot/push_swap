@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_print_c.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 22:44:05 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/05 15:04:55 by ayusa            ###   ########.fr       */
+/*   Created: 2025/05/18 15:41:18 by ayusa             #+#    #+#             */
+/*   Updated: 2025/07/05 18:54:24 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_print_c(char c, t_format *p)
 {
-	char	*c;
-	int		len;
+	int	len;
 
 	len = 0;
-	c = ft_itoa(n);
-	if (!c)
-		return (0);
-	len += write(fd, c, ft_strlen(c));
-	free(c);
+	if (p->minus)
+		len += ft_putchar_fd(c, 1);
+	len += ft_padding_width(p->width, 1, 0);
+	if (!p->minus)
+		len += ft_putchar_fd(c, 1);
+	p->width = 0;
 	return (len);
 }
