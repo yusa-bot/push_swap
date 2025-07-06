@@ -6,7 +6,7 @@
 /*   By: ayusa <ayusa@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:27:17 by ayusa             #+#    #+#             */
-/*   Updated: 2025/07/05 20:26:32 by ayusa            ###   ########.fr       */
+/*   Updated: 2025/07/06 14:54:17 by ayusa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ int	main(int ac, char **av)
 		error_exit(a, ag, ac);
 	assign_index(a);
 	b = NULL;
-	//print_stack("A", a);
 	push_swap(&a, &b);
-	//print_stack("A", a);
 	free_stack(a);
 	free_stack(b);
 	if (ac == 2)
 		free_split(ag);
+	return (0);
 }
